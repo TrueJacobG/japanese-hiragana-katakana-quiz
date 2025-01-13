@@ -1,17 +1,16 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import styles from "./page.module.css";
-import { getRandomSign } from "./utils/getRandomSign";
-import { getPoints, incrementPoints } from "./utils/pointsUtils";
-import { HIRAGANA, KATAKANA } from "./utils/symbols";
+import styles from "../page.module.css";
+import { getRandomSign } from "../utils/getRandomSign";
+import { getPoints, incrementPoints } from "../utils/pointsUtils";
+import { KATAKANA } from "../utils/symbols";
 
 const Quiz = () => {
   const [input, setInput] = useState<string>("");
   const [showCorrectResult, setShowCorrectResult] = useState<boolean>(false);
   const [correctResult, setCorrectResult] = useState<string>("");
   const [sign, setSign] = useState<string>("");
-  const [alphabet, setAlphabet] = useState<string>("");
   const [points, setPoints] = useState(getPoints());
   const [canGetPoints, setCanGetPoints] = useState<boolean>(true);
 
@@ -20,22 +19,9 @@ const Quiz = () => {
   }, []);
 
   const prepareNewSign = () => {
-    const [resultHiragana, signHiragana] = getRandomSign(HIRAGANA);
-    const [resultKatakana, signKatakana] = getRandomSign(KATAKANA);
-
-    let [result, sign, alphabet] = ["", "", ""];
-    if (Math.floor(Math.random() * 2) == 1) {
-      result = resultHiragana;
-      sign = signHiragana;
-      alphabet = "HIRAGANA";
-    } else {
-      result = resultKatakana;
-      sign = signKatakana;
-      alphabet = "KATAKANA";
-    }
+    const [result, sign] = getRandomSign(KATAKANA);
     setCorrectResult(result);
     setSign(sign);
-    setAlphabet(alphabet);
     setInput("");
   };
 
@@ -47,7 +33,6 @@ const Quiz = () => {
           const newPoints = incrementPoints(1);
           setPoints(newPoints);
         }
-        setCanGetPoints(true);
         prepareNewSign();
       }
     } else if (event.key === "Escape") {
@@ -61,7 +46,7 @@ const Quiz = () => {
     <div className={styles.page}>
       <div>
         <h2>Points: {points}</h2>
-        <h1>{alphabet}</h1>
+        <h1>Katakana</h1>
       </div>
 
       <div className={styles.result}>

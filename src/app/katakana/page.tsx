@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import styles from "../page.module.css";
+import Main from "../components/main";
 import { getRandomSign } from "../utils/getRandomSign";
 import { getPoints, incrementPoints } from "../utils/pointsUtils";
 import { KATAKANA } from "../utils/symbols";
@@ -43,33 +43,16 @@ const Quiz = () => {
   };
 
   return (
-    <div className={styles.page}>
-      <div>
-        <h2>Points: {points}</h2>
-        <h1>Katakana</h1>
-      </div>
-
-      <div className={styles.result}>
-        <p>{sign}</p>
-        <p className={styles.correctResult}>{showCorrectResult && correctResult}</p>
-      </div>
-
-      <div className={styles.inputTextBox}>
-        <p className={styles.inputText}>{input}</p>
-      </div>
-
-      <div className={styles.inputContainer}>
-        <input
-          type="text"
-          className={styles.input}
-          name="input"
-          id="input"
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-          onKeyDown={handleKeyDown}
-        />
-      </div>
-    </div>
+    <Main
+      points={points}
+      alphabet={"Katakana"}
+      sign={sign}
+      showCorrectResult={showCorrectResult}
+      correctResult={correctResult}
+      input={input}
+      setInput={setInput}
+      handleKeyDown={handleKeyDown}
+    />
   );
 };
 

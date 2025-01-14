@@ -3,7 +3,8 @@
 import { useEffect, useState } from "react";
 import Main from "./components/main";
 import { getRandomSign } from "./utils/getRandomSign";
-import { getPoints, incrementPoints } from "./utils/pointsUtils";
+import { handleKeyDown } from "./utils/handleKeyDown";
+import { getPoints } from "./utils/pointsUtils";
 import { HIRAGANA, KATAKANA } from "./utils/symbols";
 
 const Quiz = () => {
@@ -39,24 +40,6 @@ const Quiz = () => {
     setInput("");
   };
 
-  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    if (event.key === "Enter") {
-      if (input === correctResult) {
-        setShowCorrectResult(false);
-        if (canGetPoints) {
-          const newPoints = incrementPoints(1);
-          setPoints(newPoints);
-        }
-        setCanGetPoints(true);
-        prepareNewSign();
-      }
-    } else if (event.key === "Escape") {
-      setShowCorrectResult(true);
-      setInput("");
-      setCanGetPoints(false);
-    }
-  };
-
   return (
     <Main
       points={points}
@@ -66,7 +49,9 @@ const Quiz = () => {
       correctResult={correctResult}
       input={input}
       setInput={setInput}
-      handleKeyDown={handleKeyDown}
+      handleKeyDown={(event) =>
+        handleKeyDown(event, input, correctResult, setShowCorrectResult, canGetPoints, setPoints, setCanGetPoints, prepareNewSign, setInput)
+      }
     />
   );
 };

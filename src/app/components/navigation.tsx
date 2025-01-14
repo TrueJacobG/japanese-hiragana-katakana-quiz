@@ -13,6 +13,10 @@ const Navigation = () => {
       <Link href="/katakana" className={styles.link}>
         Katakana
       </Link>
+      <p className={styles.link}>|</p>
+      <a className={styles.link} target="_blank" href="https://github.com/TrueJacobG/japanese-hiragana-katakana-quiz">
+        Github
+      </a>
     </nav>
   );
 };

@@ -17,6 +17,8 @@ const Navigation = () => {
       <a className={styles.link} target="_blank" href="https://github.com/TrueJacobG/japanese-hiragana-katakana-quiz">
         Github
       </a>
+      <p className={styles.link}>|</p>
+      <p className={styles.link}>Enter - Confirm, Esc - Give up</p>
     </nav>
   );
 };
